@@ -63,7 +63,7 @@ class Adventurer extends Character {
     }
 
 
-    scount() {
+    scout() {
         console.log(`${this.name} is scouting ahead...`);
         super.roll();
     }
