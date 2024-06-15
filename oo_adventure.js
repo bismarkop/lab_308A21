@@ -70,20 +70,23 @@ class Adventurer extends Character {
     duel(adventurer) {
         let dueling = true 
         while (dueling) {
-            let advAtk = adventurer.roll()
-            let thisAtk = this.roll()
             if (this.health === 50 || adventurer.health === 50) {
                 if (this.health === 50 && adventurer.health > 50) {
-                    console.log(`${adventurer.name} wins!`)
+                    console.log(`${this.name} faints...${adventurer.name} wins!`)
                     dueling = false
+                    break
                 }
                 else if (adventurer.health === 50 && this.health > 50) {
-                    console.log(`${this.name} wins!`)
+                    console.log(`${adventurer.name} faints...${this.name} wins!`)
                     dueling = false
+                    break
                 }
             }
+
+            let advAtk = adventurer.roll()
+            let thisAtk = this.roll()
             
-            else if (advAtk > thisAtk) {
+            if (advAtk > thisAtk) {
                 console.log(`${adventurer.name} attacks with his ${adventurer.weapon} and hits ${this.name}!\n`)
                 this.health -= 1
                 console.log(`Health levels:\n${this.name}: ${this.health}\n${adventurer.name}: ${adventurer.health}\n`)
