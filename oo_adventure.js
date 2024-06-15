@@ -62,30 +62,43 @@ class Adventurer extends Character {
         this.inventory.push("bedroll", "50 gold coins", "elixer"); // Every adventurer starts with a bedroll, 50 gold coins and an elixer
     }
 
-
     scout() {
         console.log(`${this.name} is scouting ahead...`);
         super.roll();
     }
 
     duel(adventurer) {
-        let advAtk = adventurer.roll()
-        let thisAtk = this.roll()
-        // console.log(`${adventurer.name} attacks and swings his ${this.weapon} and connects on ${this.name}!`)
-
-        if (advAtk > thisAtk) {
-            console.log(`${adventurer.name} attacks and swings his ${adventurer.weapon} and hits ${this.name}!`)
-            this.health -= 1
-            return
+        let dueling = true 
+        while (dueling) {
+            let advAtk = adventurer.roll()
+            let thisAtk = this.roll()
+            if (this.health === 50 || adventurer.health === 50) {
+                if (this.health === 50 && adventurer.health > 50) {
+                    console.log(`${adventurer.name} wins!`)
+                    dueling = false
+                }
+                else if (adventurer.health === 50 && this.health > 50) {
+                    console.log(`${this.name} wins!`)
+                    dueling = false
+                }
+            }
+            
+            else if (advAtk > thisAtk) {
+                console.log(`${adventurer.name} attacks with his ${adventurer.weapon} and hits ${this.name}!\n`)
+                this.health -= 1
+                console.log(`Health levels:\n${this.name}: ${this.health}\n${adventurer.name}: ${adventurer.health}\n`)
+                
+            }
+            else if (thisAtk > advAtk) {
+                console.log(`${this.name} attacks with his ${this.weapon} and hits ${adventurer.name}!\n`)
+                adventurer.health -= 1
+                console.log(`Health levels:\n${this.name}: ${this.health}\n${adventurer.name}: ${adventurer.health}\n`)
+                
+            }   
+            else {
+                console.log("Their weapons clash and cancel each other out!\n")
+            } 
         }
-        else if (thisAtk > advAtk) {
-            console.log(`${this.name} attacks and swings his ${this.weapon} and hits ${adventurer.name}!`)
-            adventurer.health -= 1
-            return
-        }   
-        else {
-            console.log("Their attacks canceled each other out!")
-        } 
     }
 }
 
