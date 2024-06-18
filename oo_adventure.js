@@ -24,12 +24,14 @@
 //     console.log(`${adventurer.inventory[item]}`)
 // }
 
+
+
 // Part 2
 class Character {
-    static MAX_HEALTH = 100;
+    static MAX_HEALTH = 100; 
     constructor(name) {
         this.name = name
-        this.health = 100
+        this.health = Character.MAX_HEALTH
         this.inventory = []
     }
     roll(mod = 0) {
@@ -53,11 +55,13 @@ class Character {
 
 // Part 3
 class Adventurer extends Character {
-    static ROLES = ["City Boy", "Warrior", "Wizard", "Healer"]; // COME BACK
+    static ROLES = ["City Boy", "Warrior", "Wizard", "Healer"]; 
     constructor(name, role, weapon) {
+        if(!Adventurer.ROLES.includes(role)) {
+            throw new Error (`${role} is not a valid role!`)
+        }
         super(name);
-        this.role = role; // adventurers have specialized roles
-
+        this.role = role; 
         this.weapon = weapon
         this.inventory.push("bedroll", "50 gold coins", "elixer"); // Every adventurer starts with a bedroll, 50 gold coins and an elixer
     }
@@ -113,15 +117,9 @@ class Companion extends Character {
         this.isAwake = isAwake
         this.isMoving = isMoving
     }
-    // fight() {
-    //     console.log(`${this.name} attacks with a ${this.attack}!`)
-    // }
 }
 const loof = new Adventurer("Loof", "City Boy", "bat")
-const bizzy = new Adventurer("Bizzy", "City Boy", "sword")
+const bizzy = new Adventurer("Bizzy", "Warrior", "sword")
 const diggy = new Companion("Diggy", "dog", "bite", true, true)
 const frank = new Companion("Frank", "flea", "bite", true, true)
 loof.duel(bizzy)
-// console.log(loof)
-// console.log(diggy)
-// console.log(frank)
